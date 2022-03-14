@@ -2,41 +2,18 @@
 
 using namespace std;
 
-void merges(int v[],int p,int m,int f)
+int shellsort(int v[],int n)
 {
-    int dim1=m-p+1;
-    int dim2=f-m;
-    int s[dim1],d[dim2];
-    for(int i=0; i<dim1; i++)
-        s[i]=v[p+i];
-    for(int j=0; j<dim2; j++)
-        d[j]=v[m+1+j];
-    int i=0,j=0,k=p;
-    while(i<dim1&&j<dim2)
-    {
-        if(s[i]<d[j])
-        {
-          v[p]=s[i];
-          i++;
-        }
-        else
-        {
-            v[p]=d[j];
-            j++;
-        }
-        k++;
-    }
-
-}
-
-void mergesort(int v[],int p,int f)
-{
-    if(p>f)
-      return;
-    m=(p+f)/2;
-    mergesort(v,p,m);
-    mergesort(v,m+1,f);
-    merges(v,p,m,f);
+  for(int i=n/2; i>0; i/=2)
+    for(int j=i; i<n; j++)
+     {
+      int aux=v[j];
+      int k;
+      for(k=j; k>=i&&v[k-i]>aux; k-=i)
+       v[k]=v[k-i];
+      v[k]=aux;
+     }
+   return 0;
 }
 
 bool test_sort(int v[],int n)
@@ -51,11 +28,11 @@ return true;
 
 int main()
 {
-     int a[10000],x;
+    int a[10000],x;
     cin>>x;
-    for(int i=0; i<x; i++)
-        cin>>a[i];
-    mergesort(a,x);
+    for(int k=0; k<x; k++)
+        cin>>a[k];
+    shellsort(a,x);
     if(test_sort(a,x))
         cout<<"Sortare corecta";
     return 0;
