@@ -27,7 +27,7 @@ return true;
 
 int main()
 {
-    int a[10000],x;
+    int a[100000000],x;
     cin>>x;
     for(int k=0; k<x; k++)
         cin>>a[k];
